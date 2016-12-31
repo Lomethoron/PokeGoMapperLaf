@@ -6,13 +6,23 @@
   "scripts": {
     "test": "echo \"Error: no test specified! Configure in package.json\" && exit 1"
   },
-  "repository": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lomethoron/PokeGoMapperLaf.git"
+  },
   "keywords": [
     "node.js",
     "eclipse",
     "nodeclipse"
   ],
-  "author": "",
+  "author": "Lomethoron",
   "license": "MIT",
-  "readmeFilename": "README.md"
+  "bugs": {
+    "url": "https://github.com/Lomethoron/PokeGoMapperLaf/issues"
+  },
+  "homepage": "https://github.com/Lomethoron/PokeGoMapperLaf#readme",
+  "dependencies": {
+    "@google/maps": "^0.3.1",
+    "express": "^4.14.0"
+  }
 }
