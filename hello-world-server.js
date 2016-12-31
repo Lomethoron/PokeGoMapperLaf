@@ -1,5 +1,5 @@
 var express = require('express');
-var app = express();
+var app = require('app');
 var path = require('path');
 
 app.get('/', function (req, res) {
