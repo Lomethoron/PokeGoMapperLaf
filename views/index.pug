@@ -1,5 +1,20 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  h3 My Google Maps Demo
+  #map
+    script.
+      function initMap() {
+      console.log("initing Map!");
+      var uluru = {lat: -25.363, lng: 131.044};
+      var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 4,
+      center: uluru
+      });
+      var marker = new google.maps.Marker({
+      position: uluru,
+      map: map
+      });
+      }
+    script(async='', defer='', src='https://maps.googleapis.com/maps/api/js?key=AIzaSyAPSczFBFn9zTquT37n68AYqkRytoUpqp8&callback=initMap')
+  	
