@@ -6,7 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
-var users = require('./routes/users');
+var mapper = require('./routes/mapper');
 
 var app = express();
 
@@ -28,8 +28,9 @@ app.use(require('node-sass-middleware')({
 }));
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+
 app.use('/', index);
-app.use('/users', users);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -50,6 +51,13 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
+
+var MongoClient = require('mongodb').MongoClient
+    , assert = require('assert');
+
+// Connection URL
+var dburl = 'mongodb://localhost:27017/myproject';
+
 
 app.listen(1234, function () {
 	console.log('Example app listening on port 1234!');

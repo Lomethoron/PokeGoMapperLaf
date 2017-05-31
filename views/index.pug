@@ -1,7 +1,12 @@
 extends layout
 
 block content
-  h3 My Google Maps Demo
-  #map
-  script(async='', defer='', src='https://maps.googleapis.com/maps/api/js?key=AIzaSyAPSczFBFn9zTquT37n68AYqkRytoUpqp8&callback=initMap')
-  script(type='text/javascript' src='javascripts/index.js')
+  div(id = "login-container", class = "col-xs-4 col-xs-offset-4")
+      form(class = "login-form" method = "post")
+        input(type = "username" class = "form-control" name = "username" placeholder = "Username" aria-describedby = "username" required = "")
+        input(type = "password" class = "form-control" name = "password" placeholder = "Password" aria-describedby = "password" required = "")
+        button(class = "btn btn-primary text-right" id = "login-button") Log In
+        div(id = "login-button-blocker")
+        div(id = "sign-up") 
+            span Not an existing user? 
+            a(href = "/") Sign Up!

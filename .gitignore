@@ -1,3 +1,8 @@
+#VS Project
+*.njsproj
+*.sln
+.vs
+
 # Logs
 logs
 *.log
