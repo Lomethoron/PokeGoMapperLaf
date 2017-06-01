@@ -4,11 +4,17 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
-var index = require('./routes/index');
-var mapper = require('./routes/mapper');
+var flash = require('express-flash');
+var session = require('express-session');
+var MongoStore = require('connect-mongo')(session);
 
 var app = express();
+
+var MongoClient = require('mongodb').MongoClient
+var assert = require('assert');
+
+// Connection URL
+var dburl = 'mongodb://localhost:27017/myproject';
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -20,6 +26,13 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(session({
+    cookie: {maxAge: 6000 },
+    store: new MongoStore({ url: dburl }),
+    resave: true,
+    secret: 'lolsecret'
+}));
+app.use(flash());
 app.use(require('node-sass-middleware')({
   src: path.join(__dirname, 'public'),
   dest: path.join(__dirname, 'public'),
@@ -28,9 +41,37 @@ app.use(require('node-sass-middleware')({
 }));
 app.use(express.static(path.join(__dirname, 'public')));
 
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
+app.use(passport.initialize());
+app.use(passport.session());
+
+passport.use(new LocalStrategy(
+    function (username, password, done) {
+        console.log("AUTHENTIC AUTHENTICATION AUTHENTICATING!");
+        MongoClient.connect(dburl, function(err, db) {
+            if (err) return done(err);
+
+            // find user
+            var users = db.collection('users');
+            users.find({ username: username }).next(function (err, user) {
+                if(err) return done(err);
+                if (!user) return done(null, false, { message: 'Incorrect Username and Password' });
+                console.log(user.username);
+            });
 
 
-app.use('/', index);
+
+
+            // check password
+
+            db.close();
+        });
+    })
+);
+
+var routes = require('./routes/routes')(passport);
+app.use('/', routes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -52,11 +93,7 @@ app.use(function(err, req, res, next) {
 
 module.exports = app;
 
-var MongoClient = require('mongodb').MongoClient
-    , assert = require('assert');
 
-// Connection URL
-var dburl = 'mongodb://localhost:27017/myproject';
 
 
 app.listen(1234, function () {

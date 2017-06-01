@@ -1,5 +1,9 @@
-module.exports = function (router) {
-    router.post('/', function (req, res) {
-        console.log(req.body);
-    });
+module.exports = function (router, passport) {
+    router.post('/',
+        passport.authenticate('local', {
+            successRedirect: '/map',
+            failureRedirect: '/',
+            failureFlash: true
+        })
+    );
 }

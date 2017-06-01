@@ -5,8 +5,10 @@ block content
       form(class = "login-form" method = "post")
         input(type = "username" class = "form-control" name = "username" placeholder = "Username" aria-describedby = "username" required = "")
         input(type = "password" class = "form-control" name = "password" placeholder = "Password" aria-describedby = "password" required = "")
+        div(class = "error alert alert-danger" id = "login-error") #{message}
         button(class = "btn btn-primary text-right" id = "login-button") Log In
         div(id = "login-button-blocker")
         div(id = "sign-up") 
             span Not an existing user? 
             a(href = "/") Sign Up!
+  script(type='text/javascript' src='javascripts/alert.js')
