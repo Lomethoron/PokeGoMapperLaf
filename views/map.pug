@@ -1,7 +1,7 @@
 extends layout
 
 block content
-  h3 My Google Maps Demo
   #map
+  link(rel='stylesheet', href='/stylesheets/map.css')
   script(async='', defer='', src='https://maps.googleapis.com/maps/api/js?key=AIzaSyAPSczFBFn9zTquT37n68AYqkRytoUpqp8&callback=initMap')
-  script(type='text/javascript' src='javascripts/mapper.js')
+  script(type='text/javascript' src='javascripts/mapcontroller.js')

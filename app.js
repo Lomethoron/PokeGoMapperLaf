@@ -46,6 +46,24 @@ var LocalStrategy = require('passport-local').Strategy;
 app.use(passport.initialize());
 app.use(passport.session());
 
+passport.serializeUser(function (user, done) {
+    console.log(user);
+    done(null, user._id);
+});
+
+passport.deserializeUser(function (id, done) {
+    MongoClient.connect(dburl, function (err, db) {
+        if (err) return done(err);
+
+        // find user
+        var users = db.collection('users');
+        users.find({ _id: id }).next(function (err, user) {
+            db.close();
+            done(err, user);
+        });
+    });
+})
+
 passport.use(new LocalStrategy(
     function (username, password, done) {
         console.log("AUTHENTIC AUTHENTICATION AUTHENTICATING!");
@@ -55,17 +73,22 @@ passport.use(new LocalStrategy(
             // find user
             var users = db.collection('users');
             users.find({ username: username }).next(function (err, user) {
-                if(err) return done(err);
-                if (!user) return done(null, false, { message: 'Incorrect Username and Password' });
-                console.log(user.username);
+                if (err) {
+                    db.close();
+                    return done(err);
+                }
+                if (!user) {
+                    db.close();
+                    return done(null, false, { message: 'Incorrect Username and Password' });
+                }
+                //need to ensure this is not plaintext during signup or being sent
+                if (user.password !== password) {
+                    db.close();
+                    return done(null, false, { message: 'Incorrect Username and Password' });
+                }
+                db.close();
+                return done(null, user);
             });
-
-
-
-
-            // check password
-
-            db.close();
         });
     })
 );

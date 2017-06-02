@@ -11,7 +11,7 @@ module.exports = function (passport) {
 
     /* GET home page. */
     router.get('/', function (req, res, next) {
-        res.render('index', { title: 'Express', message: req.flash('error') });
+        res.render('index', { title: 'Login - PokeMap', message: req.flash('error') });
     });
 
     return router;
