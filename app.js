@@ -1,5 +1,6 @@
 var express = require('express');
 var path = require('path');
+var fs = require('fs');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
@@ -8,13 +9,27 @@ var flash = require('express-flash');
 var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
 
+
 var app = express();
 
 var MongoClient = require('mongodb').MongoClient
 var assert = require('assert');
 
+/*var https = require('https');
+var http = require('http');
+var key = fs.readFileSync('keys/private.key');
+var cert = fs.readFileSync('keys/certificate.crt');
+
+var httpsOptions = {
+    key: key,
+    cert, cert
+};
+
+var httpsRedirect = require('express-force-ssl');
+app.use(httpsRedirect);*/
+
 // Connection URL
-var dburl = 'mongodb://localhost:27017/myproject';
+var dburl = 'mongodb://localhost:27017/pokeTracker';
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -116,11 +131,15 @@ app.use(function(err, req, res, next) {
 
 module.exports = app;
 
-
-
-
 app.listen(1234, function () {
-	console.log('Example app listening on port 1234!');
+    console.log('Server now running on port 1234');
 });
+/*https.createServer(httpsOptions, app).listen(1234, function() {
+    console.log('Https server running on port 1234');
+});
+
+http.createServer(app).listen(2345, function() {
+    console.log('Http redirect server running on 2345');
+})*/
 
 

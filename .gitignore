@@ -37,3 +37,6 @@ node_modules
 
 # Debug log from npm
 npm-debug.log
+
+# keys and other sensitive things that don't belong in a repo
+keys/
