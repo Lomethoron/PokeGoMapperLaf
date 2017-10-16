@@ -8,6 +8,7 @@ function initMap() {
         gestureHandling: "greedy"
     });
 
+    //keeps map with in bounds
 	var bounds = new google.maps.LatLngBounds(new google.maps.LatLng(
 			40.6951129, -75.2136497), new google.maps.LatLng(40.7025829,
 			-75.2001077));
@@ -40,11 +41,21 @@ function initMap() {
 							curLong = eastBound;
 
 						map.setCenter(new google.maps.LatLng(curLat, curLong));
-					});
+        });
 
+    //keeps map zoomed in to stay with in bounds
 	google.maps.event.addListener(map, 'zoom_changed', function() {
 		if (map.getZoom() < minZoomLevel)
 			map.setZoom(minZoomLevel);
-	});
+    });
+
+    google.maps.event.addListener(map, 'rightclick', function(dclick) {
+        var marker = new google.maps.Marker({
+            position: dclick.latLng,
+            map: map
+        });
+    });
 };
+
+
 

@@ -12,7 +12,8 @@ var MongoStore = require('connect-mongo')(session);
 
 var app = express();
 
-var MongoClient = require('mongodb').MongoClient
+var MongoClient = require('mongodb').MongoClient,
+    ObjectID = require('mongodb').ObjectID;
 var assert = require('assert');
 
 /*var https = require('https');
@@ -42,18 +43,22 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(session({
-    cookie: {maxAge: 6000 },
+    cookie: { maxAge: 1000 * 60 * 60 * 1 },
+    rolling: true, //update timeout on user action?
     store: new MongoStore({ url: dburl }),
     resave: true,
-    secret: 'lolsecret'
+    secret: 'lolsecret',
+    saveUninitialized: false
 }));
 app.use(flash());
+
 app.use(require('node-sass-middleware')({
   src: path.join(__dirname, 'public'),
   dest: path.join(__dirname, 'public'),
   indentedSyntax: true,
   sourceMap: true
 }));
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 var passport = require('passport');
@@ -63,6 +68,7 @@ app.use(passport.session());
 
 passport.serializeUser(function (user, done) {
     console.log(user);
+    console.log(user._id);
     done(null, user._id);
 });
 
@@ -72,7 +78,7 @@ passport.deserializeUser(function (id, done) {
 
         // find user
         var users = db.collection('users');
-        users.find({ _id: id }).next(function (err, user) {
+        users.find({ _id: new ObjectID.createFromHexString(id) }).next(function (err, user) { //the id is wrapped up in an ObjectID in mongo, go check when you don't believe yourself
             db.close();
             done(err, user);
         });
@@ -101,6 +107,7 @@ passport.use(new LocalStrategy(
                     db.close();
                     return done(null, false, { message: 'Incorrect Username and Password' });
                 }
+
                 db.close();
                 return done(null, user);
             });
@@ -108,12 +115,12 @@ passport.use(new LocalStrategy(
     })
 );
 
-var routes = require('./routes/routes')(passport);
-app.use('/', routes);
+require('./routes/routes')(passport, app);
+//app.use('/', routes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  var err = new Error('Not Found');
+  var err = new Error('Not Found: '+req.path);
   err.status = 404;
   next(err);
 });

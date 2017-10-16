@@ -1,5 +1,5 @@
-module.exports = function (router, passport) {
-    router.post('/',
+module.exports = function (app, passport) {
+    app.post('/',
         passport.authenticate('local', {
             successRedirect: '/map',
             failureRedirect: '/',

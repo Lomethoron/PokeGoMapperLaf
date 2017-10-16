@@ -1,19 +1,20 @@
-module.exports = function (passport) {
-    var express = require('express');
-    var router = express.Router();
-    var bodyParser = require('body-parser');
-
-    var login = require('./login')(router, passport);
-    var map = require('./mapper')(router);
-
-    router.use(bodyParser.json());
-    router.use(bodyParser.urlencoded({ extended: true }));
+module.exports = function (passport, app) {
+    //var login = require('./login')(app, passport);
+    var map = require('./mapper');
 
     /* GET home page. */
-    router.get('/', function (req, res, next) {
+    app.get('/', function (req, res, next) {
         res.render('index', { title: 'Login - PokeMap', message: req.flash('error') });
     });
+    app.post('/',
+        passport.authenticate('local', {
+            successRedirect: '/map',
+            failureRedirect: '/',
+            failureFlash: true
+        })
+    );
 
-    return router;
+    app.use('/map', map);
+    return;
 }
 
