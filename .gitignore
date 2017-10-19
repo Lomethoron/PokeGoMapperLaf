@@ -40,3 +40,6 @@ npm-debug.log
 
 # keys and other sensitive things that don't belong in a repo
 keys/
+
+# supporting programs for development
+docs/development

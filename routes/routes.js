@@ -1,3 +1,5 @@
+/* This file contains everything about routes
+    Its an attempt to clean up app.js D: */
 module.exports = function (passport, app) {
     //var login = require('./login')(app, passport);
     var map = require('./mapper');

@@ -49,11 +49,17 @@ function initMap() {
 			map.setZoom(minZoomLevel);
     });
 
-    google.maps.event.addListener(map, 'rightclick', function(dclick) {
+    google.maps.event.addListener(map, 'click', function(e) {
         var marker = new google.maps.Marker({
-            position: dclick.latLng,
+            position: e.latLng,
             map: map
         });
+        $('#input-background').css('visibility', 'visible');
+        $('#input-background').addClass('transition');
+        $('#input').css('visibility', 'visible');
+        $('#input').addClass('transition');
+        $('#lat').val(e.latLng.lat());
+        $('#lng').val(e.latLng.lng());
     });
 };
 

@@ -5,6 +5,26 @@ block content
   #map
   #input-background
     #input
+        form(method = "post")
+            #form-group
+                label(for = "pokemonType") Pokemon Type
+                select.form-control#pokemonType
+            #form-group
+                label(for = datetime) Time Caught
+                input.form-control#datetime(type = "datetime-local")
+            #form-group
+                label(for = loc) Location
+                div.input-group()
+                    input.form-control.loc#lat(type = "text", placeholder = "Latitude", readonly)
+                    div.input-group-addon() N
+                div.input-group()
+                    input.form-control.loc#lng(type = "text", placeholder = "Longitude", readonly)
+                    div.input-group-addon() W
+            #form-group
+                label(for = name) Submitter
+                input.form-control#name(type = "text", placeholder = "Name", readonly)
+            button.btn.btn-default(type = "submit") Submit
+
   link(rel='stylesheet', href='/stylesheets/map.css')
   script(async='', defer='', src='https://maps.googleapis.com/maps/api/js?key=AIzaSyAPSczFBFn9zTquT37n68AYqkRytoUpqp8&callback=initMap')
   script(type='text/javascript' src='javascripts/mapcontroller.js')
