@@ -63,5 +63,14 @@ function initMap() {
     });
 };
 
+$(document).ready(function () {
+    $('#submit-sighting').click(function (e) {
+        e.preventDefault();
+        console.log($('#sighitng').serialize());
+        $.post('/map', $('#sighitng').serialize(), function (res) {
+            console.log(res);
+        }, 'json');
+    });
+});
 
 

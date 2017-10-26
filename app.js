@@ -78,7 +78,7 @@ passport.deserializeUser(function (id, done) {
         var users = db.collection('users');
         users.find({ _id: new ObjectID.createFromHexString(id) }).next(function (err, user) { //the id is wrapped up in an ObjectID in mongo, go check when you don't believe yourself
             db.close();
-            done(err, user);
+            done(err, user._id);
         });
     });
 })

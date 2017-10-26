@@ -5,10 +5,10 @@ block content
   #map
   #input-background
     #input
-        form(method = "post")
+        form#sighitng(method = "post")
             #form-group
-                label(for = "pokemonType" required) Pokemon Type
-                select.form-control#pokemonType
+                label(for = "species") Pokemon Species
+                select.form-control#species(name = "species" required)
                     option.species-selector() #001 Bulbasaur
                     option.species-selector() #002 Ivysaur
                     option.species-selector() #003 Venusaur
@@ -260,24 +260,136 @@ block content
                     option.species-selector() #249 Lugia
                     option.species-selector() #250 Ho-Oh
                     option.species-selector() #251 Celebi
+                    option.species-selector() #252 Treecko
+                    option.species-selector() #253 Grovyle
+                    option.species-selector() #254 Sceptile
+                    option.species-selector() #255 Torchic
+                    option.species-selector() #256 Combusken
+                    option.species-selector() #257 Blaziken
+                    option.species-selector() #258 Mudkip
+                    option.species-selector() #259 Marshtomp
+                    option.species-selector() #260 Swampert
+                    option.species-selector() #261 Poochyena
+                    option.species-selector() #262 Mightyena
+                    option.species-selector() #263 Zigzagoon
+                    option.species-selector() #264 Linoone
+                    option.species-selector() #265 Wurmple
+                    option.species-selector() #266 Silcoon
+                    option.species-selector() #267 Beautifly
+                    option.species-selector() #268 Cascoon
+                    option.species-selector() #269 Dustox
+                    option.species-selector() #270 Lotad
+                    option.species-selector() #271 Lombre
+                    option.species-selector() #272 Ludicolo
+                    option.species-selector() #273 Seedot
+                    option.species-selector() #274 Nuzleaf
+                    option.species-selector() #275 Shiftry
+                    option.species-selector() #276 Taillow
+                    option.species-selector() #277 Swellow
+                    option.species-selector() #278 Wingull
+                    option.species-selector() #279 Pelipper
+                    option.species-selector() #280 Ralts
+                    option.species-selector() #281 Kirlia
+                    option.species-selector() #282 Gardevoir
+                    option.species-selector() #283 Surskit
+                    option.species-selector() #284 Masquerain
+                    option.species-selector() #285 Shroomish
+                    option.species-selector() #286 Breloom
+                    option.species-selector() #287 Slakoth
+                    option.species-selector() #288 Vigoroth
+                    option.species-selector() #289 Slaking
+                    option.species-selector() #290 Nincada
+                    option.species-selector() #291 Ninjask
+                    option.species-selector() #292 Shedinja
+                    option.species-selector() #293 Whismur
+                    option.species-selector() #294 Loudred
+                    option.species-selector() #295 Exploud
+                    option.species-selector() #296 Makuhita
+                    option.species-selector() #297 Hariyama
+                    option.species-selector() #298 Azurill
+                    option.species-selector() #299 Nosepass
+                    option.species-selector() #300 Skitty
+                    option.species-selector() #301 Delcatty
+                    option.species-selector() #302 Sableye
+                    option.species-selector() #303 Mawile
+                    option.species-selector() #304 Aron
+                    option.species-selector() #305 Lairon
+                    option.species-selector() #306 Aggron
+                    option.species-selector() #307 Meditite
+                    option.species-selector() #308 Medicham
+                    option.species-selector() #309 Electrike
+                    option.species-selector() #310 Manectric
+                    option.species-selector() #311 Plusle
+                    option.species-selector() #312 Minun
+                    option.species-selector() #313 Volbeat
+                    option.species-selector() #314 Illumise
+                    option.species-selector() #315 Roselia
+                    option.species-selector() #316 Gulpin
+                    option.species-selector() #317 Swalot
+                    option.species-selector() #318 Carvanha
+                    option.species-selector() #319 Sharpedo
+                    option.species-selector() #320 Wailmer
+                    option.species-selector() #321 Wailord
+                    option.species-selector() #322 Numel
+                    option.species-selector() #323 Camerupt
+                    option.species-selector() #324 Torkoal
+                    option.species-selector() #325 Spoink
+                    option.species-selector() #326 Grumpig
+                    option.species-selector() #327 Spinda
+                    option.species-selector() #328 Trapinch
+                    option.species-selector() #329 Vibrava
+                    option.species-selector() #330 Flygon
+                    option.species-selector() #331 Cacnea
+                    option.species-selector() #332 Cacturne
+                    option.species-selector() #333 Swablu
+                    option.species-selector() #334 Altaria
+                    option.species-selector() #335 Zangoose
+                    option.species-selector() #336 Seviper
+                    option.species-selector() #337 Lunatone
+                    option.species-selector() #338 Solrock
+                    option.species-selector() #339 Barboach
+                    option.species-selector() #340 Whiscash
+                    option.species-selector() #341 Corphish
+                    option.species-selector() #342 Crawdaunt
+                    option.species-selector() #343 Baltoy
+                    option.species-selector() #344 Claydol
+                    option.species-selector() #345 Lileep
+                    option.species-selector() #346 Cradily
+                    option.species-selector() #347 Anorith
+                    option.species-selector() #348 Armaldo
+                    option.species-selector() #349 Feebas
+                    option.species-selector() #350 Milotic
+                    option.species-selector() #351 Castform
+                    option.species-selector() #352 Kecleon
+                    option.species-selector() #353 Shuppet
+                    option.species-selector() #354 Banette
+                    option.species-selector() #355 Duskull
+                    option.species-selector() #356 Dusclops
+                    option.species-selector() #357 Tropius
+                    option.species-selector() #358 Chimecho
+                    option.species-selector() #359 Absol
+                    option.species-selector() #360 Wynaut
+                    option.species-selector() #361 Snorunt
+                    option.species-selector() #362 Glalie
+                    option.species-selector() #363 Spheal
+                    option.species-selector() #364 Sealeo
+                    option.species-selector() #365 Walrein
+                    option.species-selector() #366 Clamperl
             #form-group
                 label(for = date) Minutes since catch
-                input.form-control#date(type = "number" min = "0" required)
+                input.form-control#date(type = "number", name = "catchtime", min = "0", required)
             #form-group
                 label(for = date) Minutes since spawn
-                input.form-control#date(type = "number" min = "0")
+                input.form-control#date(type = "number", name = "spawntime", min = "0")
             #form-group
                 label(for = loc) Location
                 div.input-group()
-                    input.form-control.loc#lat(type = "text", placeholder = "Latitude", readonly)
+                    input.form-control.loc#lat(type = "text", placeholder = "Latitude", name = "lat", readonly)
                     div.input-group-addon() N
                 div.input-group()
-                    input.form-control.loc#lng(type = "text", placeholder = "Longitude", readonly)
+                    input.form-control.loc#lng(type = "text", placeholder = "Longitude", name = "lng", readonly)
                     div.input-group-addon() W
-            #form-group
-                label(for = name) Submitter
-                input.form-control#name(type = "text", placeholder = "Name", readonly)
-            button.btn.btn-default(type = "submit") Submit
+            button.btn.btn-default#submit-sighting(type = "submit") Submit
 
   link(rel='stylesheet', href='/stylesheets/map.css')
   script(async='', defer='', src='https://maps.googleapis.com/maps/api/js?key=AIzaSyAPSczFBFn9zTquT37n68AYqkRytoUpqp8&callback=initMap')
