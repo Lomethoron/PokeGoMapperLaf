@@ -65,10 +65,13 @@ function initMap() {
 
 $(document).ready(function () {
     $('#submit-sighting').click(function (e) {
-        e.preventDefault();
-        console.log($('#sighitng').serialize());
+        e.preventDefault(); //allows json post to happen
+        console.log("sending");
         $.post('/map', $('#sighitng').serialize(), function (res) {
             console.log(res);
+            for (value in res) {
+                console.log(value.valid);
+            }
         }, 'json');
     });
 });

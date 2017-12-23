@@ -6,7 +6,7 @@ block content
   #input-background
     #input
         form#sighitng(method = "post")
-            #form-group
+            .form-group
                 label(for = "species") Pokemon Species
                 select.form-control#species(name = "species" required)
                     option.species-selector() #001 Bulbasaur
@@ -375,20 +375,25 @@ block content
                     option.species-selector() #364 Sealeo
                     option.species-selector() #365 Walrein
                     option.species-selector() #366 Clamperl
-            #form-group
+                span.help-block() agsgasdg
+            .form-group
                 label(for = date) Minutes since catch
                 input.form-control#date(type = "number", name = "catchtime", min = "0", required)
-            #form-group
+                span.help-block()
+            .form-group
                 label(for = date) Minutes since spawn
                 input.form-control#date(type = "number", name = "spawntime", min = "0")
-            #form-group
+                span.help-block()
+            .form-group
                 label(for = loc) Location
                 div.input-group()
                     input.form-control.loc#lat(type = "text", placeholder = "Latitude", name = "lat", readonly)
                     div.input-group-addon() N
+                span.help-block()
                 div.input-group()
                     input.form-control.loc#lng(type = "text", placeholder = "Longitude", name = "lng", readonly)
                     div.input-group-addon() W
+                span.help-block()
             button.btn.btn-default#submit-sighting(type = "submit") Submit
 
   link(rel='stylesheet', href='/stylesheets/map.css')
