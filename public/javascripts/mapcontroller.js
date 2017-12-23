@@ -58,8 +58,8 @@ function initMap() {
         $('#input-background').addClass('transition');
         $('#input').css('visibility', 'visible');
         $('#input').addClass('transition');
-        $('#lat').val(e.latLng.lat());
-        $('#lng').val(e.latLng.lng());
+        $('#lat > input').val(e.latLng.lat());
+        $('#lng > input').val(e.latLng.lng());
     });
 };
 
@@ -67,10 +67,40 @@ $(document).ready(function () {
     $('#submit-sighting').click(function (e) {
         e.preventDefault(); //allows json post to happen
         console.log("sending");
-        $.post('/map', $('#sighitng').serialize(), function (res) {
+        $.post('/map', $('#sighting').serialize(), function (res) {
             console.log(res);
+            var submitted = true;
             for (value in res) {
-                console.log(value.valid);
+                var name = value;
+                var valid = res[value].valid;
+                var message = res[value].message;
+                console.log(name, valid, message);
+                if (!valid) {
+                    $('#sighting').find("#" + name + "help").css('display', 'initial');
+                    $('#sighting').find(".form-group#" + name).addClass('has-error');
+                    $('#sighting').find(".form-group#" + name).removeClass('has-success');
+                    //lat and long are different (nested) from other fields
+                    if (name == 'lat' || name == 'lng') {
+                        $('#loc').addClass('has-error');
+                    }
+                    $('#sighting').find("#" + name + "help").html(message);
+                    submitted = false;
+                }
+                else if (valid) {
+                    $('#sighting').find("#" + name + "help").css('display', 'none');
+                    $('#sighting').find(".form-group#" + name).addClass('has-success');
+                    $('#sighting').find(".form-group#" + name).removeClass('has-error');
+                    //lat and long are different (nested) from other fields
+                    if (name == 'lat' || name == 'lng') {
+                        $('#loc').addClass('has-success');
+                    }
+
+                    $('#sighting').find("#" + name + "help").html('');
+                }
+
+                else {
+                    submitted = false;
+                }
             }
         }, 'json');
     });
